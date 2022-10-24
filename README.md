@@ -1,8 +1,14 @@
 # Dan's dotfiles
 
-## Install
+## Usage
 
-Just clone and run the `install.sh` script!
+Just run:
+
+```sh
+git clone <this repo>
+cd <this repo>
+sudo ./install.sh
+```
 
 ## License
 
