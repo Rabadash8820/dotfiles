@@ -31,4 +31,8 @@ for script in scripts/*.sh; do
     fi
 done
 
+echo ""
+echo "You should now restart your terminal session so that the new aliases in ~/.bashrc take effect."
+echo ""
+
 exit 0
