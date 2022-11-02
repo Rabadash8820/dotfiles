@@ -11,7 +11,7 @@ alias lsl="ls -l"
 alias lslr="ls -l --recursive"
 alias lsr="ls --recursive"
 
-alias rmrf="rm --force --recursive"
+alias rmfr="rm --force --recursive"
 
 alias src="source ~/.bashrc"
 alias virc="vim ~/.bashrc"
