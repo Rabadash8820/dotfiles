@@ -2,12 +2,12 @@
 
 cfgFilePath=$1
 if [ -z "$cfgFilePath" ]; then
-    echo "Config file path was not provided. Exiting..."
+    echo "Config file path was not provided"
     exit 1
 fi
 
 if [ ! -f "$cfgFilePath" ]; then
-    echo "Config file at '$cfgFilePath' does not exist. Exiting..."
+    echo "Config file at '$cfgFilePath' does not exist"
     exit 1
 fi
 
