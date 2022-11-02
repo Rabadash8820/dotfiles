@@ -33,8 +33,12 @@ for script in $(dirname "$0")/scripts/*.sh; do
     fi
 done
 
+# Cannot apply new aliases here. :/
+# Sourcing the rc file would only add them to _this_ script's process, not the calling shell environment.
+
+SHELL_RC_PATH="/home/$SUDO_USER/.bashrc"
 echo ""
-echo "You should now restart your terminal session so that the new aliases in ~/.bashrc take effect."
+echo "You should now restart your terminal session so that the new aliases in '$SHELL_RC_PATH' take effect."
 echo ""
 
 exit 0
