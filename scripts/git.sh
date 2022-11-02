@@ -3,6 +3,8 @@
 # Load environment variables from provided configuration file
 . "$(dirname "$0")/../scripts/util/validate-config.sh"
 ADD_ALIASES_SCRIPT=$(grep ADD_ALIASES_SCRIPT "$cfgFilePath" | cut -d '=' -f 2)
+HOME_DIR=$(grep HOME_DIR "$cfgFilePath" | cut -d '=' -f 2)
+REPOS_FOLDER=$(grep REPOS_FOLDER "$cfgFilePath" | cut -d '=' -f 2)
 SHELL_RC_FILE=$(grep SHELL_RC_FILE "$cfgFilePath" | cut -d '=' -f 2)
 
 echo "Setting up Dan's git dotfiles..."
@@ -16,8 +18,7 @@ fi
 
 # Clone git aliases repo, if necessary
 gitAliasRepoName=GitAliases
-cloneRoot=/dan
-gitAliasPath=$cloneRoot/$gitAliasRepoName
+gitAliasPath=$REPOS_FOLDER/$gitAliasRepoName
 if [ -d "$gitAliasPath" ] ; then
     echo "'$gitAliasRepoName' repo already cloned"
 else
@@ -31,7 +32,7 @@ fi
 #TODO: Check if git aliases repo is up-to-date (in background on repeat?)
 
 # [include] git aliases from repo, if necessary
-globalGitConfigPath=/home/$SUDO_USER/.gitconfig
+globalGitConfigPath=$HOME_DIR/.gitconfig
 lineCount=$(grep $gitAliasRepoName "$globalGitConfigPath" | wc --lines)
 if [ $lineCount -gt 0 ] ; then
     echo "Git aliases in '$gitAliasRepoName' repo have already been [include]d in global git config at '$globalGitConfigPath'"
