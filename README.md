@@ -22,6 +22,16 @@ To use in VS Code devcontainers, update the following settings:
 }
 ```
 
+## Configuration
+
+Script will respect the following environment variables:
+
+| Var | Value if undefined | Description
+|--|--|--|
+| `DOTFILES_HOME_DIR` | `/home/$SUDO_USER` | Home directory of the calling user.
+| `DOTFILES_SHELL_RC_FILE` | `/home/$SUDO_USER/.bashrc` | Absolute path to the current shell's .*rc file.
+| `DOTFILES_REPOS_FOLDER` | `/home/$SUDO_USER/repos` | Absolute path to folder where helper repos will be cloned/updated.
+
 ## Contributing
 
 All install scripts:
