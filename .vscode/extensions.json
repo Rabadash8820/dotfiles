@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "vscode-icons-team.vscode-icons",
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "davidanson.vscode-markdownlint",
+        "medo64.render-crlf"
+    ]
+}
