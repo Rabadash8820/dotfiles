@@ -12,14 +12,27 @@ COLOR_ERROR=$COLOR_RED
 COLOR_SUCCESS=$COLOR_GREEN
 COLOR_STOP="\e[0m"
 
-#TODO: Verify that we have elevated permissions
+# TODO: Verify that we have elevated permissions
+
+# Generate temporary shared configuration file for all install scripts
+currDir=$(dirname "$0")
+homeDir=/home/$SUDO_USER
+cfgFilePath=$homeDir/dotfiles/.env
+echo "Generating temporary shared configuration file at '$cfgFilePath'..."
+(cat <<EOF
+ADD_ALIASES_SCRIPT=$currDir/scripts/util/add-aliases.sh
+HOME_DIR=${DOTFILES_HOME_DIR:-$homeDir}
+SHELL_RC_FILE=${DOTFILES_SHELL_RC_FILE:-$homeDir/.bashrc}
+REPOS_FOLDER=${DOTFILES_REPOS_FOLDER:-$homeDir/repos}
+EOF
+) > "$cfgFilePath"
 
 # Run all install scripts in series.
 # This loop will not work if the absolute path of THIS script contains spaces
-for script in $(dirname "$0")/scripts/*.sh; do
+for script in $currDir/scripts/*.sh; do
     echo ""
     echo "${COLOR_STARTING}***** Running '$script'...$COLOR_STOP"
-    bash "$script"
+    bash "$script" "$cfgFilePath"
 
     status=$?
     echo ""
@@ -36,9 +49,13 @@ done
 # Cannot apply new aliases here. :/
 # Sourcing the rc file would only add them to _this_ script's process, not the calling shell environment.
 
-SHELL_RC_PATH="/home/$SUDO_USER/.bashrc"
 echo ""
-echo "You should now restart your terminal session so that the new aliases in '$SHELL_RC_PATH' take effect."
+echo "Removing temporary configuration file at '$cfgFilePath'..."
+rm $cfgFilePath
+
+SHELL_RC_FILE="/home/$SUDO_USER/.bashrc"
+echo ""
+echo "You should now restart your terminal session so that the new aliases in '$SHELL_RC_FILE' take effect."
 echo ""
 
 exit 0

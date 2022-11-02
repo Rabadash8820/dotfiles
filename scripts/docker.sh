@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Load environment variables from provided configuration file
+. "$(dirname "$0")/../scripts/util/validate-config.sh"
+ADD_ALIASES_SCRIPT=$(grep ADD_ALIASES_SCRIPT "$cfgFilePath" | cut -d '=' -f 2)
+SHELL_RC_FILE=$(grep SHELL_RC_FILE "$cfgFilePath" | cut -d '=' -f 2)
+
 echo "Setting up Dan's docker dotfiles..."
 
 (cat <<EOF
@@ -76,4 +81,4 @@ alias dvols="docker secret ls"
 alias dvopr="docker secret prune"
 alias dvorm="docker secret rm"
 EOF
-) | "$(dirname "$0")/util/add-aliases.sh" "/home/$SUDO_USER/.bashrc" "docker"
+) | "$ADD_ALIASES_SCRIPT" "$SHELL_RC_FILE" "docker"

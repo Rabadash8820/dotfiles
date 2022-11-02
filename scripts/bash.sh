@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Load environment variables from provided configuration file
+. "$(dirname "$0")/../scripts/util/validate-config.sh"
+ADD_ALIASES_SCRIPT=$(grep ADD_ALIASES_SCRIPT "$cfgFilePath" | cut -d '=' -f 2)
+SHELL_RC_FILE=$(grep SHELL_RC_FILE "$cfgFilePath" | cut -d '=' -f 2)
+
 echo "Setting up Dan's bash dotfiles..."
 
 (cat <<EOF
@@ -21,4 +26,4 @@ alias wcl="wc --lines"
 alias wcm="wcm --chars"
 alias wcm="wcw --words"
 EOF
-) | "$(dirname "$0")/util/add-aliases.sh" "/home/$SUDO_USER/.bashrc" "bash"
+) | "$ADD_ALIASES_SCRIPT" "$SHELL_RC_FILE" "bash"
