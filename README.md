@@ -5,9 +5,21 @@
 Just run:
 
 ```sh
+cd ~
 git clone <this repo>
-cd <this repo>
-sudo ./install.sh
+sudo ~/dotfiles/install.sh
+```
+
+**Note: Cloning in `~` is required. The install script expects itself to exist there.**
+
+To use in VS Code devcontainers, update the following settings:
+
+```jsonc
+{
+    "dotfiles.installCommand": "sudo ~/dotfiles/install.sh",
+    "dotfiles.repository": "<this-repo-url>",
+    // etc.
+}
 ```
 
 ## Contributing
@@ -20,7 +32,7 @@ All install scripts:
 - MUST be invokable from the main install script OR in isolation (with appropriate arguments/options)
 - MAY call other scripts in series or in parallel
 - MUST NOT make assumptions about the current working directory
-- MUST be idempotent (can be run multiple times without additional side effects)
+- MUST be idempotent (can be run multiple times without additional side effects, like appending to the same file multiple times)
 - MAY perform operations requiring elevated privileges
 
 ## License
