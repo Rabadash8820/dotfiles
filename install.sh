@@ -14,7 +14,9 @@ COLOR_STOP="\e[0m"
 
 #TODO: Verify that we have elevated permissions
 
-for script in scripts/*.sh; do
+# Run all install scripts in series.
+# This loop will not work if the absolute path of THIS script contains spaces
+for script in $(dirname "$0")/scripts/*.sh; do
     echo ""
     echo "${COLOR_STARTING}***** Running '$script'...$COLOR_STOP"
     bash "$script"
