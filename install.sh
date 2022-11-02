@@ -1,5 +1,12 @@
 #!/bin/sh
 
+# Verify that we have elevated permissions
+if [ $(id -u) -ne 0 ]; then
+    echo "Install scripts must be run with root permissions"
+    exit 1
+fi
+
+# Set constants
 STATUS_SUCCESS=0
 STATUS_NON_TERMINAL=1
 
@@ -11,8 +18,6 @@ COLOR_WARNING=$COLOR_YELLOW
 COLOR_ERROR=$COLOR_RED
 COLOR_SUCCESS=$COLOR_GREEN
 COLOR_STOP="\e[0m"
-
-# TODO: Verify that we have elevated permissions
 
 # Generate temporary shared configuration file for all install scripts
 currDir=$(dirname "$0")
