@@ -41,5 +41,8 @@ EOF
     ) >> "$globalGitConfigPath"
 fi
 
-#TODO: Save this alias for user
+# Save git-related shell aliases
+(cat <<EOF
 alias g=git
+EOF
+) | "$(dirname "$0")/util/add-aliases.sh" "/home/$SUDO_USER/.bashrc" "git"

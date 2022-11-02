@@ -1,11 +1,8 @@
 #!/bin/sh
 
-#TODO: Save these aliases for user
-
 echo "Setting up Dan's docker dotfiles..."
 
-echo "Setting docker shortcut aliases..."
-
+(cat <<EOF
 alias d=docker
 
 alias dcf="docker config"
@@ -78,3 +75,5 @@ alias dvoi="docker secret inspect"
 alias dvols="docker secret ls"
 alias dvopr="docker secret prune"
 alias dvorm="docker secret rm"
+EOF
+) | "$(dirname "$0")/util/add-aliases.sh" "/home/$SUDO_USER/.bashrc" "docker"
