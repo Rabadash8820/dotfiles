@@ -3,6 +3,8 @@
 echo "Setting up Dan's bash dotfiles..."
 
 (cat <<EOF
+alias cpr="cp --recursive"
+
 alias lsa="ls --all"
 alias lsal="ls --all -l"
 alias lsl="ls -l"
