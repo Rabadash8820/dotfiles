@@ -1,10 +1,6 @@
 #!/bin/sh
 
-# Verify that we have elevated permissions
-if [ $(id -u) -ne 0 ]; then
-    echo "Install scripts must be run with root permissions"
-    exit 1
-fi
+# TODO: Verify that we can assume elevated permissions with sudo
 
 # Set constants
 STATUS_SUCCESS=0
@@ -21,7 +17,7 @@ COLOR_STOP="\e[0m"
 
 # Generate temporary shared configuration file for all install scripts
 currDir=$(dirname "$0")
-homeDir=/home/$SUDO_USER
+homeDir=$HOME
 cfgFilePath=$homeDir/dotfiles/.env
 echo "Generating temporary shared configuration file at '$cfgFilePath'..."
 reposFolder=${DOTFILES_REPOS_FOLDER:-$homeDir/repos}
