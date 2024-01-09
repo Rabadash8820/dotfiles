@@ -6,6 +6,7 @@ ADD_ALIASES_SCRIPT=$(grep ADD_ALIASES_SCRIPT "$cfgFilePath" | cut -d '=' -f 2)
 HOME_DIR=$(grep HOME_DIR "$cfgFilePath" | cut -d '=' -f 2)
 REPOS_FOLDER=$(grep REPOS_FOLDER "$cfgFilePath" | cut -d '=' -f 2)
 SHELL_RC_FILE=$(grep SHELL_RC_FILE "$cfgFilePath" | cut -d '=' -f 2)
+USER_NAME=$(grep USER_NAME "$cfgFilePath" | cut -d '=' -f 2)
 
 echo "Setting up Dan's git dotfiles..."
 
@@ -46,6 +47,12 @@ else
 EOF
     ) >> "$globalGitConfigPath"
 fi
+
+# Set other git configs
+echo "Setting other global git configs..."
+git config --global user.name "$USER_NAME"
+git config --global commit.gpgsign true
+git config --global tag.gpgsign true
 
 # Save git-related shell aliases
 (cat <<EOF

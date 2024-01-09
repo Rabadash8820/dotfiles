@@ -17,7 +17,7 @@ COLOR_STOP="\e[0m"
 
 # Generate temporary shared configuration file for all install scripts
 currDir=$(dirname "$0")
-homeDir=$HOME
+homeDir=$SUDO_HOME
 cfgFilePath=$homeDir/dotfiles/.env
 echo "Generating temporary shared configuration file at '$cfgFilePath'..."
 reposFolder=${DOTFILES_REPOS_FOLDER:-$homeDir/repos}
@@ -26,6 +26,7 @@ ADD_ALIASES_SCRIPT=$currDir/scripts/util/add-aliases.sh
 HOME_DIR=${DOTFILES_HOME_DIR:-$homeDir}
 SHELL_RC_FILE=${DOTFILES_SHELL_RC_FILE:-$homeDir/.bashrc}
 REPOS_FOLDER=$reposFolder
+USER_NAME=${DOTFILES_USER_NAME:-Dan Vicarel}
 EOF
 ) > "$cfgFilePath"
 
@@ -60,7 +61,7 @@ echo ""
 echo "Removing temporary configuration file at '$cfgFilePath'..."
 rm $cfgFilePath
 
-SHELL_RC_FILE="/home/$SUDO_USER/.bashrc"
+SHELL_RC_FILE="/$homeDir/.bashrc"
 echo ""
 echo "You should now restart your terminal session so that the new aliases in '$SHELL_RC_FILE' take effect."
 echo ""
