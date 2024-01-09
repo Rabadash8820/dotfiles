@@ -26,6 +26,7 @@ ADD_ALIASES_SCRIPT=$currDir/scripts/util/add-aliases.sh
 HOME_DIR=${DOTFILES_HOME_DIR:-$homeDir}
 SHELL_RC_FILE=${DOTFILES_SHELL_RC_FILE:-$homeDir/.bashrc}
 REPOS_FOLDER=$reposFolder
+USER_NAME=${DOTFILES_USER_NAME:-Dan Vicarel}
 EOF
 ) > "$cfgFilePath"
 
