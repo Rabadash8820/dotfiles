@@ -16,7 +16,7 @@ To use in VS Code devcontainers, update the following settings:
 
 ```jsonc
 {
-    "dotfiles.installCommand": "sudo ~/dotfiles/install.sh",
+    // Don't set `dotfiles.installCommand`, as we're using the default `install.sh` script name
     "dotfiles.repository": "<this-repo-url>",
     // etc.
 }
@@ -43,7 +43,7 @@ All install scripts:
 - MAY call other scripts in series or in parallel
 - MUST NOT make assumptions about the current working directory
 - MUST be idempotent (can be run multiple times without additional side effects, like appending to the same file multiple times)
-- MAY perform operations requiring elevated privileges
+- MAY perform operations requiring elevated privileges (the entrypoint install script will self-elevate itself before executing others)
 
 ## License
 

@@ -1,6 +1,16 @@
 #!/bin/sh
 
-# TODO: Verify that we can assume elevated permissions with sudo
+# Restart as root user
+# Inspired by https://stackoverflow.com/questions/71622881/how-can-i-request-elevated-permissions-in-a-bash-scripts-begin-and-let-it-go-at
+# and https://hugomartins.io/essays/2017/03/elevate-shell-scripts/
+# https://www.petefreitag.com/blog/environment-variables-sudo/
+if [ -z "$SUDO_USER" ]; then
+    echo "Elevating install script..."
+    sudo SUDO_HOME=$HOME "$0" "$@"
+    exit $?
+else
+    echo "Install script already elevated (SUDO_USER: $SUDO_USER)"
+fi
 
 # Set constants
 STATUS_SUCCESS=0
