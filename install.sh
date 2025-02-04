@@ -25,6 +25,12 @@ COLOR_ERROR=$COLOR_RED
 COLOR_SUCCESS=$COLOR_GREEN
 COLOR_STOP="\e[0m"
 
+echo ""
+echo "***************************"
+echo "DAN'S DOTFILES ARE BEGIN!!!"
+echo "***************************"
+echo ""
+
 # Generate temporary shared configuration file for all install scripts
 currDir=$(dirname "$0")
 homeDir=$SUDO_HOME
