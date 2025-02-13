@@ -2,7 +2,7 @@
 
 # Load environment variables from provided configuration file
 . "$(dirname "$0")/../scripts/util/validate-config.sh"
-ADD_ALIASES_SCRIPT=$(grep ADD_ALIASES_SCRIPT "$cfgFilePath" | cut -d '=' -f 2)
+ADD_RC_COMMANDS_SCRIPT=$(grep ADD_RC_COMMANDS_SCRIPT "$cfgFilePath" | cut -d '=' -f 2)
 SHELL_RC_FILE=$(grep SHELL_RC_FILE "$cfgFilePath" | cut -d '=' -f 2)
 MACHINE_TYPE=$(grep MACHINE_TYPE "$cfgFilePath" | cut -d '=' -f 2)
 HOME_DIR=$(grep HOME_DIR "$cfgFilePath" | cut -d '=' -f 2)
@@ -41,4 +41,4 @@ alias gpgh="gpg --help"
 alias gpgk="gpg --list-keys"
 alias gpgs="gpg --sign"
 EOF
-) | "$ADD_ALIASES_SCRIPT" "$SHELL_RC_FILE" "gpg"
+) | "$ADD_RC_COMMANDS_SCRIPT" "$SHELL_RC_FILE" "gpg"

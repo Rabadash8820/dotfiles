@@ -2,7 +2,7 @@
 
 # Load environment variables from provided configuration file
 . "$(dirname "$0")/../scripts/util/validate-config.sh"
-ADD_ALIASES_SCRIPT=$(grep ADD_ALIASES_SCRIPT "$cfgFilePath" | cut -d '=' -f 2)
+ADD_RC_COMMANDS_SCRIPT=$(grep ADD_RC_COMMANDS_SCRIPT "$cfgFilePath" | cut -d '=' -f 2)
 HOME_DIR=$(grep HOME_DIR "$cfgFilePath" | cut -d '=' -f 2)
 REPOS_FOLDER=$(grep REPOS_FOLDER "$cfgFilePath" | cut -d '=' -f 2)
 SHELL_RC_FILE=$(grep SHELL_RC_FILE "$cfgFilePath" | cut -d '=' -f 2)
@@ -69,4 +69,4 @@ echo "${COLOR_WARNING}Set user.signingkey in your global git config to your desi
 (cat <<EOF
 alias g=git
 EOF
-) | "$ADD_ALIASES_SCRIPT" "$SHELL_RC_FILE" "git"
+) | "$ADD_RC_COMMANDS_SCRIPT" "$SHELL_RC_FILE" "git"

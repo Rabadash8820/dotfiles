@@ -51,7 +51,7 @@ cfgFilePath=$homeDir/dotfiles/.env
 echo "Generating temporary shared configuration file at '$cfgFilePath'..."
 reposFolder=${DOTFILES_REPOS_FOLDER:-$homeDir/repos}
 (cat <<EOF
-ADD_ALIASES_SCRIPT=$currDir/scripts/util/add-aliases.sh
+ADD_RC_COMMANDS_SCRIPT=$currDir/scripts/util/add-rc-commands.sh
 HOME_DIR=${DOTFILES_HOME_DIR:-$homeDir}
 SHELL_RC_FILE=${DOTFILES_SHELL_RC_FILE:-$homeDir/.bashrc}
 REPOS_FOLDER=$reposFolder
