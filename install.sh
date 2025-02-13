@@ -29,6 +29,15 @@ export COLOR_ERROR=$COLOR_RED
 export COLOR_SUCCESS=$COLOR_GREEN
 export COLOR_STOP="\e[0m"
 
+export MACHINE_TYPE_WSL=wsl
+export MACHINE_TYPE_DEVCONTAINER=devcontainer
+
+machineType=${1:-$MACHINE_TYPE_DEVCONTAINER}
+if [ "$machineType" != "$MACHINE_TYPE_DEVCONTAINER" -a "$machineType" != "$MACHINE_TYPE_WSL" ]; then
+    echo "${COLOR_ERROR}Unknown machine type '$machineType' in first argument. Must be '$MACHINE_TYPE_DEVCONTAINER' or '$MACHINE_TYPE_WSL'$COLOR_STOP"
+    exit 1
+fi
+
 echo ""
 echo "***************************"
 echo "DAN'S DOTFILES ARE BEGIN!!!"
@@ -48,6 +57,7 @@ SHELL_RC_FILE=${DOTFILES_SHELL_RC_FILE:-$homeDir/.bashrc}
 REPOS_FOLDER=$reposFolder
 USER_NAME=${DOTFILES_USER_NAME:-Dan Vicarel}
 USER_EMAIL=${DOTFILES_USER_EMAIL:-dan.vicarel@gmail.com}
+MACHINE_TYPE=$machineType
 EOF
 ) > "$cfgFilePath"
 
