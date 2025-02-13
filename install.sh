@@ -47,6 +47,7 @@ HOME_DIR=${DOTFILES_HOME_DIR:-$homeDir}
 SHELL_RC_FILE=${DOTFILES_SHELL_RC_FILE:-$homeDir/.bashrc}
 REPOS_FOLDER=$reposFolder
 USER_NAME=${DOTFILES_USER_NAME:-Dan Vicarel}
+USER_EMAIL=${DOTFILES_USER_EMAIL:-dan.vicarel@gmail.com}
 EOF
 ) > "$cfgFilePath"
 
