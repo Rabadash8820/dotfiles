@@ -50,6 +50,9 @@ USER_NAME=${DOTFILES_USER_NAME:-Dan Vicarel}
 EOF
 ) > "$cfgFilePath"
 
+echo "Shared configurations:"
+cat "$cfgFilePath"
+echo ""
 
 echo "Creating folder where helper repos will be cloned with the right permissions"
 mkdir --parents "$reposFolder"
