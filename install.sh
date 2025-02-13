@@ -9,7 +9,11 @@ if [ -z "$SUDO_USER" ]; then
     sudo SUDO_HOME=$HOME "$0" "$@"
     exit $?
 else
-    echo "Install script already elevated (SUDO_USER: $SUDO_USER)"
+    echo "Install script now elevated (SUDO_USER: $SUDO_USER)"
+    if [ -z "$SUDO_HOME" ]; then
+        echo "Script was initially run as root but must be initially run by a non-root user"
+        exit 1
+    fi
 fi
 
 # Set constants
