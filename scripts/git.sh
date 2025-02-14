@@ -11,6 +11,11 @@ USER_EMAIL=$(grep USER_EMAIL "$cfgFilePath" | cut -d '=' -f 2)
 
 echo "Setting up Dan's git dotfiles..."
 
+# Update to latest stable Git
+# (distro may be using an older version that doesn't support all the comands/options that we need)
+add-apt-repository ppa:git-core/ppa
+apt-get update --yes && apt-get install --yes
+
 # Verify git is installed
 gitVersion=$(git --version)
 if [ -z "$gitVersion" ] ; then
