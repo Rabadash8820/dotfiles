@@ -18,6 +18,9 @@ if [ -z "$gitVersion" ] ; then
     exit 1
 fi
 
+echo "Ensuring LFS installed in the repo..."
+git lfs install > /dev/null
+
 # Clone git aliases repo, if necessary
 gitAliasRepoName=GitAliases
 gitAliasPath=$REPOS_FOLDER/$gitAliasRepoName
