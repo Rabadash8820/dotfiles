@@ -17,7 +17,6 @@ if [ -z "$gpgVersion" ] ; then
 fi
 
 if [ "$MACHINE_TYPE" = "$MACHINE_TYPE_WSL" ]; then
-
     sudo -u $SUDO_USER touch "$HOME_DIR/gpg-agent.conf"
     grep pinentry-program "$HOME_DIR/gpg-agent.conf" > /dev/null
     if [ $? = 0 ]; then
@@ -25,11 +24,8 @@ if [ "$MACHINE_TYPE" = "$MACHINE_TYPE_WSL" ]; then
     else
         echo "Setting GPG pinentry-program to Gpg4win..."
         echo "# Use Gpg4win in host Windows OS for pin entry" >> "$HOME_DIR/gpg-agent.conf"
-        echo "pinentry-program /mnt/c/Program Files (x86)/GnuPG/bin/pinentry-basic.exe" >> "$HOME_DIR/gpg-agent.conf"
+        echo "pinentry-program /mnt/c/Program Files (x86)/Gpg4win/bin/pinentry.exe" >> "$HOME_DIR/gpg-agent.conf"
     fi
-
-elif [ "$MACHINE_TYPE" = "$MACHINE_TYPE_DEVCONTAINER" ]; then
-    echo "DEVCONTAINER"
 fi
 
 (cat <<EOF
