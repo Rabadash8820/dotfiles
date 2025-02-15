@@ -65,21 +65,26 @@ EOF
     ) >> "$globalGitConfigPath"
 fi
 
+# TODO: update Git to at least v2.45.0 so we can use `git config --comment` option (see https://github.com/git/git/blob/master/Documentation/RelNotes/2.45.0.txt#L69)
+# Mainly for Debian-based devcontainers...
+# Latest stable Debian (bookworm) only goes up to git 2.41.0, and the bookworm-backports apt repository doesn't have higher either.
+# Don't forget to add Danovo WSL GPG key to GitHub...
+
 # Set other git configs (for correct non-root user)
 echo "Setting other global git configs..."
-function trySetGitConfig() {
+function setGitConfigIfEmpty() {
     sudo -u $SUDO_USER git config --global "$1" > /dev/null
     if [ $? -gt 0 ]; then
-        sudo -u $SUDO_USER git config --global --comment "$3" "$1" "$2"
+        sudo -u $SUDO_USER git config --global "$1" "$2"
     fi
 }
-trySetGitConfig "user.name" "$USER_NAME"
-trySetGitConfig "user.email" "$USER_EMAIL"
-trySetGitConfig "user.signingkey" "TODO"
-sudo -u $SUDO_USER git config --global --comment "Require committer name/email to be set in config, not guessed by git" user.useconfigonly true
+setGitConfigIfEmpty "user.name" "$USER_NAME"
+setGitConfigIfEmpty "user.email" "$USER_EMAIL"
+setGitConfigIfEmpty "user.signingkey" "TODO"
+sudo -u $SUDO_USER git config --global user.useconfigonly true  # Require committer name/email to be set in config, not guessed by git
 sudo -u $SUDO_USER git config --global commit.gpgsign true
 sudo -u $SUDO_USER git config --global tag.gpgsign true
-echo "${COLOR_WARNING}Set user.signingkey in your global git config to your desired GPG key ID$COLOR_STOP"
+echo -e "${COLOR_WARNING}Set user.signingkey in your global git config to your desired GPG key ID$COLOR_STOP"
 
 # Save git-related shell aliases
 (cat <<EOF
