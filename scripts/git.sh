@@ -30,15 +30,24 @@ gitAliasRepoName=GitAliases
 gitAliasPath=$REPOS_FOLDER/$gitAliasRepoName
 if [ -d "$gitAliasPath" ] ; then
     echo "'$gitAliasRepoName' repo already cloned"
+    branch=$(git -C "$gitAliasPath" rev-parse --abbrev-ref HEAD)
+    modifiedFileCount=$(git -C "$gitAliasPath" status --short | grep "^ M *" | wc --lines)
+    if [ "$branch" = "main" -a "$modifiedFileCount" = "0" ]; then
+        echo "Pulling latest changes to '$gitAliasRepoName' repo..."
+        git -C "$gitAliasPath" pull
+        #TODO: git pull
+    else
+        echo -e "${COLOR_WARNING}Could not update '$gitAliasRepoName' repo. Branch is not 'main' or there are uncommitted file modifications...$COLOR_STOP"
+    fi
 else
     gitAliasRepoUrl=https://github.com/Rabadash8820/$gitAliasRepoName
     echo "Cloning repo '$gitAliasRepoUrl' into '$gitAliasPath'..."
     mkdir --parents "$gitAliasPath"
     git clone $gitAliasRepoUrl "$gitAliasPath"
     chown --recursive $SUDO_USER:$SUDO_USER "$gitAliasPath"
+    git -C "$gitAliasPath" lfs install
+    git -C "$gitAliasPath" lfs pull
 fi
-
-#TODO: Check if git aliases repo is up-to-date (in background on repeat?)
 
 # [include] git aliases from repo, if necessary
 globalGitConfigPath=$HOME_DIR/.gitconfig
