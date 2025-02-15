@@ -11,11 +11,18 @@ USER_EMAIL=$(grep USER_EMAIL "$cfgFilePath" | cut -d '=' -f 2)
 
 echo "Setting up Dan's git dotfiles..."
 
-# Verify git is installed
+# TODO: update Git to latest stable version so we have all subcommands/options
+
+# Ensure git is installed
 gitVersion=$(git --version)
 if [ -z "$gitVersion" ] ; then
-    echo "Install git and make sure its available on your PATH, then run this script again."
-    exit 1
+    echo "Installing git..."
+    apt-get install git
+fi
+gitLfsVersion=$(git lfs --version)
+if [ -z "$gitLfsVersion" ] ; then
+    echo "Installing git LFS..."
+    apt-get install git-lfs
 fi
 
 # Clone git aliases repo, if necessary
