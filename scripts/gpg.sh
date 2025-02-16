@@ -16,16 +16,15 @@ if [ -z "$gpgVersion" ] ; then
     exit 1
 fi
 
-if [ "$MACHINE_TYPE" = "$MACHINE_TYPE_WSL" ]; then
-    sudo -u $SUDO_USER touch "$HOME_DIR/gpg-agent.conf"
-    grep pinentry-program "$HOME_DIR/gpg-agent.conf" > /dev/null
-    if [ $? = 0 ]; then
-        echo "GPG pinentry-program already set"
-    else
-        echo "Setting GPG pinentry-program to Gpg4win..."
-        echo "# Use Gpg4win in host Windows OS for pin entry" >> "$HOME_DIR/gpg-agent.conf"
-        echo "pinentry-program /mnt/c/Program Files (x86)/Gpg4win/bin/pinentry.exe" >> "$HOME_DIR/gpg-agent.conf"
-    fi
+gpgAgentConfPath=$HOME_DIR/.gnupg/gpg-agent.conf
+sudo -u $SUDO_USER touch "$gpgAgentConfPath"
+grep pinentry-program "$gpgAgentConfPath" > /dev/null
+if [ $? = 0 ]; then
+    echo "GPG pinentry-program already set"
+else
+    echo "Setting GPG pinentry-program to Gpg4win..."
+    echo "# Use Gpg4win in host Windows OS for pin entry" >> "$gpgAgentConfPath"
+    echo "pinentry-program /mnt/c/Program Files (x86)/Gpg4win/bin/pinentry.exe" >> "$gpgAgentConfPath"
 fi
 
 (cat <<EOF
