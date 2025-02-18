@@ -82,6 +82,10 @@ Just add the following:
     ]
 ```
 
+**NOTE**: GPG still seems to fail in devcontainers with messages like "gpg: signing failed: No pinentry" or "gpg: signing failed: Inappropriate ioctl for device",
+unless a GPG agent is already running in WSL (I believe one is started by signing a git commit in WSL).
+The pinentry prompt must be completed too.
+
 ## Contributing
 
 All install scripts:
