@@ -17,12 +17,12 @@ echo "Setting up Dan's git dotfiles..."
 gitVersion=$(git --version)
 if [ -z "$gitVersion" ] ; then
     echo "Installing git..."
-    apt-get install git
+    apt-get install git --yes
 fi
 gitLfsVersion=$(git lfs --version)
 if [ -z "$gitLfsVersion" ] ; then
     echo "Installing git LFS..."
-    apt-get install git-lfs
+    apt-get install git-lfs --yes
 fi
 
 # Clone git aliases repo, if necessary
