@@ -9,11 +9,11 @@ HOME_DIR=$(grep HOME_DIR "$cfgFilePath" | cut -d '=' -f 2)
 
 echo "Setting up GPG for a '$MACHINE_TYPE' machine..."
 
-# Verify GPG is installed
+# Ensure GPG is installed
 gpgVersion=$(gpg --version)
-if [ -z "$gpgVersion" ] ; then
-    echo "Install gpg and make sure its available on your PATH, then run this script again."
-    exit 1
+if [ -z "$gitVersion" ] ; then
+    echo "Installing gpg..."
+    apt-get install gpg gnupg2 --yes
 fi
 
 gpgAgentConfPath=$HOME_DIR/.gnupg/gpg-agent.conf
