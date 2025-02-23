@@ -80,11 +80,33 @@ function setGitConfigIfEmpty() {
 }
 setGitConfigIfEmpty "user.name" "$USER_NAME"
 setGitConfigIfEmpty "user.email" "$USER_EMAIL"
-setGitConfigIfEmpty "user.signingkey" "TODO"
+setGitConfigIfEmpty "user.signingkey" TODO
 sudo -u $SUDO_USER git config --global user.useconfigonly true  # Require committer name/email to be set in config, not guessed by git
 sudo -u $SUDO_USER git config --global commit.gpgsign true
 sudo -u $SUDO_USER git config --global tag.gpgsign true
 echo -e "${COLOR_WARNING}Set user.signingkey in your global git config to your desired GPG key ID$COLOR_STOP"
+
+# Git configs recommended from that article by Scott Chacon (a GitHub co-founder): https://blog.gitbutler.com/how-git-core-devs-configure-git/
+sudo -u $SUDO_USER git config --global column.ui auto
+sudo -u $SUDO_USER git config --global branch.sort "-committerdate"
+sudo -u $SUDO_USER git config --global tag.sort "version:refname"
+sudo -u $SUDO_USER git config --global init.defaultBranch "main"
+sudo -u $SUDO_USER git config --global diff.algorithm histogram
+sudo -u $SUDO_USER git config --global diff.colorMoved plain
+sudo -u $SUDO_USER git config --global diff.mnemonicPrefix true
+sudo -u $SUDO_USER git config --global diff.renames true
+sudo -u $SUDO_USER git config --global push.autoSetupRemote true
+sudo -u $SUDO_USER git config --global push.followTags true
+sudo -u $SUDO_USER git config --global fetch.prune true
+sudo -u $SUDO_USER git config --global fetch.pruneTags true
+sudo -u $SUDO_USER git config --global fetch.all true
+sudo -u $SUDO_USER git config --global help.autocorrect prompt
+sudo -u $SUDO_USER git config --global commit.verbose true
+sudo -u $SUDO_USER git config --global rerere.enabled true
+sudo -u $SUDO_USER git config --global rerere.autoupdate true
+sudo -u $SUDO_USER git config --global rebase.autoSquash true
+sudo -u $SUDO_USER git config --global rebase.autoStash true
+sudo -u $SUDO_USER git config --global rebase.updateRefs true
 
 # Save git-related shell aliases
 (cat <<EOF
