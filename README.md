@@ -82,10 +82,16 @@ Just add the following:
     ]
 ```
 
-**NOTE**: GPG still seems to fail in devcontainers with messages like "gpg: signing failed: No pinentry" or "gpg: signing failed: Inappropriate ioctl for device",
-unless a GPG agent is already running in WSL.
-This can be fixed by running `gpgconf --kill gpg-agent` in WSL (and/or Windows?) then doing a dummy encryption in WSL with `echo derp | gpg --sign`.
-This should open the pinentry prompt. This will then allow commit signing from devcontainers, in the terminal or in VS Code!
+#### Troubleshooting
+
+GPG may fail in devcontainers after Windows sleeps/restarts with messages like "gpg: signing failed: No pinentry" or "gpg: signing failed: Inappropriate ioctl for device".
+This can usually be fixed by running `gpgconf --kill gpg-agent` in WSL then doing a dummy encryption in WSL with `echo derp | gpg --sign`,
+completing the pinentry prompt. This will then allow commit signing from devcontainers, in the terminal or in VS Code!
+If signing in WSL still fails, then you may need to restart it by running `wsl --shutdown` from Windows.
+
+If you see "No secret key" errors when signing commits/tags in WSL or devcontainers, make sure that you have actually configured `user.signingkey`,
+using either `git config --global user.signingkey <your-key>` or manually editing `~/.gitconfig`.
+The key should be the output of `gpg -k --keyid-format short` for the appropriate signing key (the characters after the slash).
 
 ## Contributing
 
