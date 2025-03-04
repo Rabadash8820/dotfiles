@@ -55,7 +55,7 @@ Add the signing-only subkeys [to GitHub](https://docs.github.com/en/authenticati
 
 Other programs installed on Windows should use the Gpg4win keys automatically, but note the following:
 
-- Make sure Git Bash is using the default `gpg` command (i.e., `which gpg` returns `/usr/bin/gpg` and `GNUPGHOME` is not overridden).
+- Make sure Git Bash is using it by setting `git config --global gpg.program "C:\Program Files (x86)\GnuPG\bin\gpg.exe"` command (also make sure `GNUPGHOME` is not overridden).
 - In GitKraken, under "Preferences > Commit Signing" make sure that "GPG Program" is set to the default `gpg` with an appropriate "Signing Key" selected, and both "Sign Commits by Default" and "Sign Tags by Default" are checked. Also, under "Preferences > Profiles", check "Keep my .gitconfig updated with my GitKraken Desktop Profile preferences" and set the right key ID for each GitKraken profile.
 - In VS Code settings, check "Git: Enable Commit Signing" (and similar checkboxes for extensions like Git Graph).
   - **TODO**: how to make commits _from VS Code_ while remoted into WSL
