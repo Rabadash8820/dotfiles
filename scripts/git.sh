@@ -80,11 +80,10 @@ function setGitConfigIfEmpty() {
 }
 setGitConfigIfEmpty "user.name" "$USER_NAME"
 setGitConfigIfEmpty "user.email" "$USER_EMAIL"
-setGitConfigIfEmpty "user.signingkey" TODO
+# setGitConfigIfEmpty "user.signingkey" # This will be set by the GPG install script
 sudo -u $SUDO_USER git config --global user.useconfigonly true  # Require committer name/email to be set in config, not guessed by git
 sudo -u $SUDO_USER git config --global commit.gpgsign true
 sudo -u $SUDO_USER git config --global tag.gpgsign true
-echo -e "${COLOR_WARNING}Set user.signingkey in your global git config to your desired GPG key ID$COLOR_STOP"
 
 # Git configs recommended from that article by Scott Chacon (a GitHub co-founder): https://blog.gitbutler.com/how-git-core-devs-configure-git/
 sudo -u $SUDO_USER git config --global column.ui auto
