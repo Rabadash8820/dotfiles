@@ -45,9 +45,9 @@ echo "***************************"
 echo ""
 
 # Generate temporary shared configuration file for all install scripts
-currDir=$(dirname "$0")
+currDir=$(realpath "$(dirname "$0")")
 homeDir=$SUDO_HOME
-cfgFilePath=$homeDir/dotfiles/.env
+cfgFilePath=$currDir/.env
 echo "Generating temporary shared configuration file at '$cfgFilePath'..."
 reposFolder=${DOTFILES_REPOS_FOLDER:-$homeDir/repos}
 (cat <<EOF
