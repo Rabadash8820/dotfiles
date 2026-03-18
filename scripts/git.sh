@@ -68,7 +68,7 @@ fi
 # TODO: update Git to at least v2.45.0 so we can use `git config --comment` option (see https://github.com/git/git/blob/master/Documentation/RelNotes/2.45.0.txt#L69)
 # Mainly for Debian-based devcontainers...
 # Latest stable Debian (bookworm) only goes up to git 2.41.0, and the bookworm-backports apt repository doesn't have higher either.
-# Don't forget to add Danovo WSL GPG key to GitHub...
+# Don't forget to add GPG signing subkeys in WSL to GitHub...
 
 # Set other git configs (for correct non-root user)
 echo "Setting other global git configs..."
@@ -78,12 +78,13 @@ function setGitConfigIfEmpty() {
         sudo -u $SUDO_USER git config --global "$1" "$2"
     fi
 }
-setGitConfigIfEmpty "user.name" "$USER_NAME"
-setGitConfigIfEmpty "user.email" "$USER_EMAIL"
-# setGitConfigIfEmpty "user.signingkey" # This will be set by the GPG install script
+setGitConfigIfEmpty user.name "$USER_NAME"
+setGitConfigIfEmpty user.email "$USER_EMAIL"
+# setGitConfigIfEmpty user.signingkey # This will be set by the GPG install script
 sudo -u $SUDO_USER git config --global user.useconfigonly true  # Require committer name/email to be set in config, not guessed by git
 sudo -u $SUDO_USER git config --global commit.gpgsign true
 sudo -u $SUDO_USER git config --global tag.gpgsign true
+sudo -u $SUDO_USER git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
 
 # Git configs recommended from that article by Scott Chacon (a GitHub co-founder): https://blog.gitbutler.com/how-git-core-devs-configure-git/
 sudo -u $SUDO_USER git config --global column.ui auto
