@@ -85,6 +85,7 @@ sudo -u $SUDO_USER git config --global user.useconfigonly true  # Require commit
 sudo -u $SUDO_USER git config --global commit.gpgsign true
 sudo -u $SUDO_USER git config --global tag.gpgsign true
 sudo -u $SUDO_USER git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
+sudo -u $SUDO_USER git config --global core.fsmonitor true
 
 # Git configs recommended from that article by Scott Chacon (a GitHub co-founder): https://blog.gitbutler.com/how-git-core-devs-configure-git/
 sudo -u $SUDO_USER git config --global column.ui auto
